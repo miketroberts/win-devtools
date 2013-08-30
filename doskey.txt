@@ -1,0 +1,35 @@
+cd = cd /d $* && "d:\devtools\cmd_title.bat"
+
+v=gvim --servername GVIM --remote $1
+v1=gvim --servername GVIM1 --remote $1
+v2=gvim --servername GVIM2 --remote $1
+v3=gvim --servername GVIM3 --remote $1
+v4=gvim --servername GVIM4 --remote $1
+vx=gvim --servername $1 --remote $2
+
+jv=gvim --servername JAVA --remote-silent $1
+rv=gvim --servername RUBY --remote-silent $1
+cv=gvim --servername C++ --remote-silent $1
+pv=gvim --servername PYTHON --remote-silent $1
+
+;= Directory Listing
+ls=ls --color $*
+ll=ls --color -l $*
+la=ls --color -a $*
+lla=ls --color -a -l $*
+
+;= Doskey Macros
+r=doskey /macrofile="d:\tools\doskey.txt"
+h=doskey /history
+
+;= Perforce Macros
+lcldiff=p4 opened -c $1 | sed -e 's/#.*//' | p4 -x - diff
+cldiff=p4 -G describe $1 | python D:\tools\cldiff.py
+cldesc=p4 describe -s $1
+shelved=p4 changes -l -u %username% -s shelved
+reopencl=for /F "usebackq" %i in (`"p4 opened -c $1 | sed -e 's/#.*//'"`) do p4 reopen -c %2 %i
+
+;= Directory navigation
+up=cd ..
+pd=pushd
+
